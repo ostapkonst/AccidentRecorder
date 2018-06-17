@@ -28,3 +28,10 @@ lib/
 
 # Application bundle for Mac OS
 *.app/
+
+# For cef_binary client
+debug.log
+*.pak
+snapshot_blob.bin
+icudtl.dat
+natives_blob.bin
