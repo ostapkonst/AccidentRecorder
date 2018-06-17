@@ -1,0 +1,25 @@
+object SQLite: TSQLite
+  OldCreateOrder = False
+  Height = 154
+  HorizontalOffset = 21
+  VerticalOffset = 772
+  Width = 291
+  PPI = 96
+  object SQLTransact: TSQLTransaction
+    Active = False
+    Action = caNone
+    Database = SQLite3Connection
+    left = 152
+    top = 24
+  end
+  object SQLite3Connection: TSQLite3Connection
+    Connected = True
+    LoginPrompt = False
+    DatabaseName = 'database.sqlite'
+    KeepConnection = True
+    Transaction = SQLTransact
+    CharSet = 'UTF8'
+    left = 48
+    top = 24
+  end
+end

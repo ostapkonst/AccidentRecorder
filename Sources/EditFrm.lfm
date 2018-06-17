@@ -1,0 +1,33 @@
+inherited EditFrame: TEditFrame
+  Width = 320
+  Align = alBottom
+  AutoSize = True
+  ClientWidth = 320
+  DesignLeft = 278
+  DesignTop = 176
+  object FieldName: TLabel[0]
+    Left = 7
+    Height = 15
+    Top = 11
+    Width = 57
+    BorderSpacing.Around = 7
+    Caption = 'FieldName'
+    ParentColor = False
+  end
+  object FieldEditor: TDBEdit[1]
+    AnchorSideLeft.Control = FieldName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 71
+    Height = 23
+    Top = 7
+    Width = 242
+    DataSource = CellEditor.DataSource
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 7
+    CharCase = ecNormal
+    MaxLength = 0
+    TabOrder = 0
+  end
+end

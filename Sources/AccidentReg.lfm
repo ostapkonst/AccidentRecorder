@@ -1,0 +1,265 @@
+object AccidentForm: TAccidentForm
+  Left = 210
+  Height = 652
+  Top = 245
+  Width = 947
+  Caption = 'Происшествия'
+  ClientHeight = 652
+  ClientWidth = 947
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '1.8.4.0'
+  WindowState = wsMaximized
+  object GoogleMap: TChromium
+    Left = 296
+    Height = 626
+    Top = 26
+    Width = 651
+    Align = alClient
+    TabOrder = 0
+    OnConsoleMessage = GoogleMapConsoleMessage
+    OnBeforePopup = GoogleMapBeforePopup
+    OnLoadEnd = GoogleMapLoadEnd
+    DefaultUrl = 'about:blank'
+  end
+  object DTPPanel: TPanel
+    Left = 0
+    Height = 626
+    Top = 26
+    Width = 296
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 626
+    ClientWidth = 296
+    TabOrder = 1
+    object DescriptionLabel: TLabel
+      Left = 8
+      Height = 15
+      Top = 256
+      Width = 58
+      Caption = 'Описание:'
+      ParentColor = False
+    end
+    object PlaceLabel: TLabel
+      Left = 8
+      Height = 15
+      Top = 64
+      Width = 122
+      Caption = 'Место происшествия:'
+      ParentColor = False
+    end
+    object DescriptionMemo: TDBMemo
+      AnchorSideBottom.Control = CommitChanges
+      Left = 8
+      Height = 298
+      Top = 280
+      Width = 278
+      Anchors = [akTop, akLeft, akBottom]
+      BorderSpacing.Bottom = 10
+      DataField = 'Описание'
+      DataSource = DTPDataSource
+      TabOrder = 0
+    end
+    object NumberLabel: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 58
+      Caption = 'Протокол:'
+      ParentColor = False
+    end
+    object CommitChanges: TBitBtn
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = DTPPanel
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 28
+      Top = 588
+      Width = 278
+      Anchors = [akBottom]
+      BorderSpacing.Bottom = 10
+      Caption = 'Применить'
+      OnClick = CommitChangesClick
+      TabOrder = 1
+    end
+    object NumberEdit: TDBEdit
+      Left = 8
+      Height = 23
+      Top = 32
+      Width = 278
+      DataField = 'Протокол'
+      DataSource = DTPDataSource
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 2
+    end
+    object PlaceEdit: TDBEdit
+      Left = 8
+      Height = 23
+      Top = 88
+      Width = 278
+      DataField = 'МестоПроисшествия'
+      DataSource = DTPDataSource
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 3
+    end
+    object LatLabel: TLabel
+      Left = 8
+      Height = 15
+      Top = 187
+      Width = 46
+      Caption = 'Широта:'
+      ParentColor = False
+    end
+    object LngLabel: TLabel
+      Left = 8
+      Height = 15
+      Top = 228
+      Width = 48
+      Caption = 'Долгота:'
+      ParentColor = False
+    end
+    object LatEdit: TDBEdit
+      Left = 64
+      Height = 23
+      Top = 183
+      Width = 152
+      DataField = 'Широта'
+      DataSource = DTPDataSource
+      ReadOnly = True
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 4
+    end
+    object LngEdit: TDBEdit
+      Left = 64
+      Height = 23
+      Top = 223
+      Width = 152
+      DataField = 'Долгота'
+      DataSource = DTPDataSource
+      ReadOnly = True
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 5
+    end
+    object DBNavigator: TDBNavigator
+      Left = 160
+      Height = 25
+      Top = 3
+      Width = 126
+      BeforeAction = DBNavigatorBeforeAction
+      BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
+      ClientHeight = 25
+      ClientWidth = 126
+      DataSource = DTPDataSource
+      Hints.Strings = (
+        'Первая запись'
+        'Предыдущая запись'
+        'Следующая запись'
+        'Последняя запись'
+        'Вставить запись'
+        'Удалить запись'
+        'Редактировать запись'
+        'Отправить запись'
+        'Отмена изменений'
+        'Обновить данные'
+      )
+      Options = []
+      TabOrder = 6
+      VisibleButtons = [nbPrior, nbNext, nbInsert, nbDelete, nbRefresh]
+    end
+    object CustomerLabel: TLabel
+      Left = 8
+      Height = 15
+      Top = 120
+      Width = 140
+      Caption = 'Сотрудник (составитель):'
+      ParentColor = False
+    end
+    object CustomerLookupCB: TDBLookupComboBox
+      Left = 8
+      Height = 23
+      Top = 144
+      Width = 278
+      DataField = 'НомерСотрудника'
+      DataSource = DTPDataSource
+      KeyField = 'НомерСотрудника'
+      ListField = 'ФИО'
+      ListFieldIndex = 0
+      ListSource = DTPCustomerDataSource
+      LookupCache = False
+      TabOrder = 7
+    end
+  end
+  object DTPToolBar: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 947
+    Caption = 'DTPToolBar'
+    EdgeInner = esNone
+    EdgeOuter = esNone
+    Flat = False
+    ShowCaptions = True
+    TabOrder = 2
+    object CustomersToolButton: TToolButton
+      Left = 1
+      Top = 0
+      Caption = 'Пешеходы'
+      OnClick = CustomersToolButtonClick
+    end
+    object AutoToolButton: TToolButton
+      Left = 68
+      Top = 0
+      Caption = 'Автомобили'
+      OnClick = AutoToolButtonClick
+    end
+    object SanctionsToolButton: TToolButton
+      Left = 146
+      Top = 0
+      Caption = 'Штрафы'
+      OnClick = SanctionsToolButtonClick
+    end
+  end
+  object DTPSQLQuery: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite.SQLite3Connection
+    Transaction = SQLite.SQLTransact
+    SQL.Strings = (
+      'SELECT * FROM ДТП;'
+    )
+    Params = <>
+    left = 512
+    top = 24
+  end
+  object DTPDataSource: TDataSource
+    DataSet = DTPSQLQuery
+    OnDataChange = DTPDataSourceDataChange
+    left = 384
+    top = 24
+  end
+  object DTPCustomerDataSource: TDataSource
+    DataSet = DTPCustomerSQLQuery
+    left = 384
+    top = 136
+  end
+  object DTPCustomerSQLQuery: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite.SQLite3Connection
+    Transaction = SQLite.SQLTransact
+    SQL.Strings = (
+      'SELECT * FROM Сотрудник;'
+    )
+    Params = <>
+    left = 512
+    top = 136
+  end
+end

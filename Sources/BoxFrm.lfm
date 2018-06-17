@@ -1,0 +1,47 @@
+inherited BoxFrame: TBoxFrame
+  Width = 320
+  Align = alBottom
+  AutoSize = True
+  ClientWidth = 320
+  DesignLeft = 638
+  DesignTop = 371
+  object FieldName: TLabel[0]
+    Left = 7
+    Height = 15
+    Top = 11
+    Width = 57
+    BorderSpacing.Around = 7
+    Caption = 'FieldName'
+    ParentColor = False
+  end
+  object DBLComboBox: TDBLookupComboBox[1]
+    AnchorSideLeft.Control = FieldName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 71
+    Height = 23
+    Top = 7
+    Width = 242
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 7
+    DataSource = CellEditor.DataSource
+    ListFieldIndex = 0
+    ListSource = ListSource
+    LookupCache = False
+    TabOrder = 0
+  end
+  object ListSource: TDataSource[2]
+    DataSet = SQLQuery
+    left = 40
+    top = 56
+  end
+  object SQLQuery: TSQLQuery[3]
+    FieldDefs = <>
+    Transaction = SQLite.SQLTransact
+    Options = []
+    Params = <>
+    left = 144
+    top = 56
+  end
+end

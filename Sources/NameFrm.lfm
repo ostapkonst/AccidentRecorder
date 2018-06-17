@@ -1,0 +1,9 @@
+object NamedFrame: TNamedFrame
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 318
+  TabOrder = 0
+  DesignLeft = 815
+  DesignTop = 407
+end

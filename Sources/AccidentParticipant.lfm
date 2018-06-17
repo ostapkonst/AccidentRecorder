@@ -1,0 +1,38 @@
+object Participants: TParticipants
+  Left = 355
+  Height = 168
+  Top = 156
+  Width = 304
+  BorderStyle = bsDialog
+  Caption = 'Участники происшествия'
+  ClientHeight = 168
+  ClientWidth = 304
+  OnCreate = FormCreate
+  LCLVersion = '1.8.4.0'
+  object DescriptionLabel: TLabel
+    Left = 48
+    Height = 15
+    Top = 40
+    Width = 214
+    Caption = 'Теперь нужно указать участников ДТП'
+    ParentColor = False
+  end
+  object ListOfCarsButton: TButton
+    Left = 32
+    Height = 25
+    Top = 88
+    Width = 240
+    Caption = 'Список автомобилей'
+    OnClick = ListOfCarsButtonClick
+    TabOrder = 0
+  end
+  object ListOfPeopleButton: TButton
+    Left = 32
+    Height = 25
+    Top = 128
+    Width = 240
+    Caption = 'Список пешеходов'
+    OnClick = ListOfPeopleButtonClick
+    TabOrder = 1
+  end
+end

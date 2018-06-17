@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="10"/>
+    <PathDelim Value="\"/>
+    <General>
+      <SessionStorage Value="InProjectDir"/>
+      <MainUnit Value="0"/>
+      <Title Value="Регистрация ДТП (Курсовая работа)"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
+    </General>
+    <i18n>
+      <EnableI18N LFM="False"/>
+    </i18n>
+    <VersionInfo>
+      <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
+      <RevisionNr Value="1"/>
+      <BuildNr Value="4"/>
+      <Language Value="0419"/>
+      <Attributes pvaPrivateBuild="True"/>
+      <StringTable Comments="Курсовая работа по БД" CompanyName="ДВФУ" FileDescription="Оболочка для работы с базой SQLiteV3" InternalName="Accident Recorder (Coursework)" LegalCopyright="Константинов О. В." OriginalFilename="AccidentRecorder.exe" ProductName="Регистрация ДТП" ProductVersion="0.0.1.0" PrivateBuild="Версия для преподавателя"/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="9">
+      <Item1>
+        <PackageName Value="Printer4Lazarus"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="lazreport"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="MemDSLaz"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="SDFLaz"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="CEF3"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="LazControls"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="FCL"/>
+      </Item7>
+      <Item8>
+        <PackageName Value="SQLDBLaz"/>
+      </Item8>
+      <Item9>
+        <PackageName Value="LCL"/>
+      </Item9>
+    </RequiredPackages>
+    <Units Count="13">
+      <Unit0>
+        <Filename Value="AccidentRecorder.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="Main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MainForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="Connection.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SQLite"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="Metadata.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="Catalog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Directory"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="Editor.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="CellEditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="MiniFilterFrm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MiniFilterFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="NameFrm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="NamedFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="EditFrm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="EditFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="BoxFrm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="BoxFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="FilterFrm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FilterFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="AccidentReg.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AccidentForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="Report.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ReportForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit12>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="AccidentRecorder"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>
