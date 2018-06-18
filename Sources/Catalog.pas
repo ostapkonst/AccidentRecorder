@@ -133,9 +133,9 @@ begin
 
   if fTable.ReadOnly then
   begin
-    AddBtn.Enabled := false;
-    EditBtn.Enabled := false;
-    DelBtn.Enabled := false;
+    AddBtn.Enabled := False;
+    EditBtn.Enabled := False;
+    DelBtn.Enabled := False;
   end;
 
   with fTable do

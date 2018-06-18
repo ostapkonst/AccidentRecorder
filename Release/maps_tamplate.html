@@ -26,9 +26,9 @@
       // animation and no animation.
 
       var marker;
-      var myLatLng = {lat: 43.106, lng: 131.874};
 
-      function initMap() {
+      function initMapVladivostok() {
+        var myLatLng = {lat: 43.106, lng: 131.874};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 13,
           center: myLatLng,
@@ -61,7 +61,7 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdrwpIjD7VTwF6kBzJV9I1Br2KVdrNf6Q&callback=initMap&language=ru">
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&language=ru&callback=initMapVladivostok">
     </script>
   </body>
 </html>

@@ -56,12 +56,13 @@ end;
 
 procedure TReportForm.FormCreate(Sender: TObject);
 begin
+  SQLDTPReport.Open;
   frDTPReport.LoadFromFile('report.lrf');
 end;
 
 procedure TReportForm.FormShow(Sender: TObject);
 begin
-  SQLDTPReport.Open;
+  SQLDTPReport.Refresh;
 end;
 
 end.

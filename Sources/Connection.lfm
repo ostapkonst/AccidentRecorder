@@ -1,8 +1,8 @@
 object SQLite: TSQLite
   OldCreateOrder = False
   Height = 154
-  HorizontalOffset = 21
-  VerticalOffset = 772
+  HorizontalOffset = 0
+  VerticalOffset = 779
   Width = 291
   PPI = 96
   object SQLTransact: TSQLTransaction

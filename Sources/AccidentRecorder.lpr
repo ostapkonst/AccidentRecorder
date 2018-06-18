@@ -8,7 +8,8 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
   Forms,
   lazcontrols,
   sdflaz,
-  memdslaz, printer4lazarus,
+  memdslaz,
+  printer4lazarus,
   Main,
   Connection,
   Metadata,
@@ -25,8 +26,8 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
 {$R *.res}
 
 begin
-  Application.Title := 'Регистрация ДТП (Курсовая '
-    + 'работа)';
+  Application.Title := 'Регистрация ДТП (Курсовая ' +
+    'работа)';
   RequireDerivedFormResource := True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

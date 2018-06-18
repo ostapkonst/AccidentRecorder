@@ -42,6 +42,7 @@ type
     procedure CommitChangesClick(Sender: TObject);
     procedure DBNavigatorBeforeAction(Sender: TObject; Button: TDBNavButtonType);
     procedure DTPDataSourceDataChange(Sender: TObject; Field: TField);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure GoogleMapBeforePopup(Sender: TObject; const browser: ICefBrowser;
@@ -109,18 +110,36 @@ begin
   ;
   {$ENDIF}
   GoogleMap.DefaultUrl := GetCurrentDir + PathDelim + 'maps_tamplate.html';
+  DTPCustomerSQLQuery.Open;
+  DTPSQLQuery.Open;
 end;
 
 procedure TAccidentForm.DTPDataSourceDataChange(Sender: TObject; Field: TField);
 begin
-  if not (GoogleMap.Browser.IsLoading) then
+  if (GoogleMap.Browser <> nil) then
     MoveGoogleMark;
+end;
+
+procedure TAccidentForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+const
+  q = 'Есть неподтвержденные изменения, выйти?';
+begin
+  if not (DTPSQLQuery.State in [dsEdit, dsInsert]) then
+    CanClose := True
+  else
+  if MessageDlg(q, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    DTPSQLQuery.CancelUpdates;
+    CanClose := True;
+  end
+  else
+    CanClose := False;
 end;
 
 procedure TAccidentForm.CommitChangesClick(Sender: TObject);
 begin
   DTPSQLQuery.ApplyUpdates;
-  DTPSQLQuery.SQLTransaction.CommitRetaining;
+  DTPSQLQuery.SQLTransaction.Commit;
   AccidentForm.Close;
 end;
 
@@ -139,8 +158,8 @@ end;
 
 procedure TAccidentForm.FormShow(Sender: TObject);
 begin
-  DTPCustomerSQLQuery.Open;
-  DTPSQLQuery.Open;
+  DTPCustomerSQLQuery.Refresh;
+  DTPSQLQuery.Refresh;
 end;
 
 procedure TAccidentForm.GoogleMapBeforePopup(Sender: TObject;

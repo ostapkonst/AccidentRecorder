@@ -1,20 +1,23 @@
 object AccidentForm: TAccidentForm
-  Left = 183
-  Height = 652
-  Top = 187
-  Width = 947
+  Left = 350
+  Height = 546
+  Top = 268
+  Width = 816
   Caption = 'Происшествия'
-  ClientHeight = 652
-  ClientWidth = 947
+  ClientHeight = 546
+  ClientWidth = 816
+  Constraints.MinHeight = 426
+  Constraints.MinWidth = 696
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
   LCLVersion = '1.8.4.0'
   WindowState = wsMaximized
   object GoogleMap: TChromium
     Left = 296
-    Height = 626
+    Height = 520
     Top = 26
-    Width = 651
+    Width = 520
     Align = alClient
     TabOrder = 0
     OnConsoleMessage = GoogleMapConsoleMessage
@@ -24,12 +27,12 @@ object AccidentForm: TAccidentForm
   end
   object DTPPanel: TPanel
     Left = 0
-    Height = 626
+    Height = 520
     Top = 26
     Width = 296
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 626
+    ClientHeight = 520
     ClientWidth = 296
     TabOrder = 1
     object DescriptionLabel: TLabel
@@ -51,7 +54,7 @@ object AccidentForm: TAccidentForm
     object DescriptionMemo: TDBMemo
       AnchorSideBottom.Control = CommitChanges
       Left = 8
-      Height = 298
+      Height = 192
       Top = 280
       Width = 278
       Anchors = [akTop, akLeft, akBottom]
@@ -64,8 +67,8 @@ object AccidentForm: TAccidentForm
       Left = 8
       Height = 15
       Top = 8
-      Width = 58
-      Caption = 'Протокол:'
+      Width = 89
+      Caption = 'Постановление:'
       ParentColor = False
     end
     object CommitChanges: TBitBtn
@@ -74,7 +77,7 @@ object AccidentForm: TAccidentForm
       AnchorSideBottom.Side = asrBottom
       Left = 8
       Height = 28
-      Top = 588
+      Top = 482
       Width = 278
       Anchors = [akBottom]
       BorderSpacing.Bottom = 10
@@ -87,7 +90,7 @@ object AccidentForm: TAccidentForm
       Height = 23
       Top = 32
       Width = 278
-      DataField = 'Протокол'
+      DataField = 'Постановление'
       DataSource = DTPDataSource
       CharCase = ecNormal
       MaxLength = 0
@@ -159,6 +162,7 @@ object AccidentForm: TAccidentForm
       ChildSizing.ControlsPerLine = 100
       ClientHeight = 25
       ClientWidth = 126
+      ConfirmDelete = False
       DataSource = DTPDataSource
       Hints.Strings = (
         'Первая запись'
@@ -203,7 +207,7 @@ object AccidentForm: TAccidentForm
     Left = 0
     Height = 26
     Top = 0
-    Width = 947
+    Width = 816
     Caption = 'DTPToolBar'
     EdgeInner = esNone
     EdgeOuter = esNone
@@ -230,7 +234,47 @@ object AccidentForm: TAccidentForm
     end
   end
   object DTPSQLQuery: TSQLQuery
-    FieldDefs = <>
+    FieldDefs = <    
+      item
+        Name = 'Постановление'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end    
+      item
+        Name = 'НомерСотрудника'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end    
+      item
+        Name = 'МестоПроисшествия'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end    
+      item
+        Name = 'Описание'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end    
+      item
+        Name = 'Дата'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end    
+      item
+        Name = 'Широта'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'Долгота'
+        DataType = ftFloat
+        Precision = -1
+      end>
     Database = SQLite.SQLite3Connection
     Transaction = SQLite.SQLTransact
     SQL.Strings = (
