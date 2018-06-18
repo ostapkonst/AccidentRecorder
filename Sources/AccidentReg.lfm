@@ -1,7 +1,7 @@
 object AccidentForm: TAccidentForm
-  Left = 210
+  Left = 183
   Height = 652
-  Top = 245
+  Top = 187
   Width = 947
   Caption = 'Происшествия'
   ClientHeight = 652

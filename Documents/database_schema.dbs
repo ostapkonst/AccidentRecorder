@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Sqlite" id="Project_42f3099" template="Default" database="Sqlite" >
+	<schema name="Default" schemaname="Default" >
+		<table name="Водитель" >
+			<column name="Паспорт" type="text" length="2000000000" jt="-1" mandatory="y" />
+			<column name="ВодительскиеПрава" type="text" length="2000000000" jt="-1" />
+			<index name="pk_Водитель" unique="PRIMARY_KEY" >
+				<column name="Паспорт" />
+			</index>
+			<index name="sqlite_autoindex_Водитель_2" unique="UNIQUE" >
+				<column name="ВодительскиеПрава" />
+			</index>
+			<fk name="Fk_Водитель" to_schema="Default" to_table="ФизическоеЛицо" delete_action="cascade" update_action="cascade" >
+				<fk_column name="Паспорт" pk="Паспорт" />
+			</fk>
+		</table>
+		<table name="ДТП" >
+			<column name="Постановление" type="text" length="2000000000" jt="-1" mandatory="y" />
+			<column name="НомерСотрудника" type="text" length="2000000000" jt="-1" />
+			<column name="МестоПроисшествия" type="text" length="2000000000" jt="-1" />
+			<column name="Описание" type="text" length="2000000000" jt="-1" />
+			<column name="Дата" type="text" length="2000000000" jt="-1" >
+				<defo>strftime(&#039;%d.%m.%Y&#039;, &#039;now&#039;)</defo>
+			</column>
+			<column name="Широта" type="real" jt="8" />
+			<column name="Долгота" type="real" jt="8" />
+			<index name="pk_ДТП" unique="PRIMARY_KEY" >
+				<column name="Постановление" />
+			</index>
+			<fk name="Fk_ДТП" to_schema="Default" to_table="Сотрудник" delete_action="cascade" update_action="cascade" >
+				<fk_column name="НомерСотрудника" pk="НомерСотрудника" />
+			</fk>
+		</table>
+		<table name="Машина" >
+			<column name="ПТС" type="text" length="2000000000" jt="-1" mandatory="y" />
+			<column name="НомерМодели" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="НомерЦвета" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="VIN" type="text" length="2000000000" jt="-1" />
+			<column name="НомерКузова" type="text" length="2000000000" jt="-1" />
+			<column name="НомерДвигателя" type="text" length="2000000000" jt="-1" />
+			<column name="ГодВыпуска" type="text" length="2000000000" jt="-1" />
+			<index name="pk_Машина" unique="PRIMARY_KEY" >
+				<column name="ПТС" />
+			</index>
+			<index name="sqlite_autoindex_Машина_4" unique="UNIQUE" >
+				<column name="НомерДвигателя" />
+			</index>
+			<index name="sqlite_autoindex_Машина_3" unique="UNIQUE" >
+				<column name="НомерКузова" />
+			</index>
+			<index name="sqlite_autoindex_Машина_2" unique="UNIQUE" >
+				<column name="VIN" />
+			</index>
+			<fk name="Fk_Машина" to_schema="Default" to_table="Модель" delete_action="cascade" update_action="cascade" >
+				<fk_column name="НомерМодели" pk="НомерМодели" />
+			</fk>
+			<fk name="Fk_Машина" to_schema="Default" to_table="Цвет" delete_action="cascade" update_action="cascade" >
+				<fk_column name="НомерЦвета" pk="НомерЦвета" />
+			</fk>
+		</table>
+		<table name="Модель" >
+			<column name="НомерМодели" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="Наименование" type="text" length="2000000000" jt="-1" />
+			<column name="Категория" type="text" length="2000000000" jt="-1" />
+			<index name="pk_Модель" unique="PRIMARY_KEY" >
+				<column name="НомерМодели" />
+			</index>
+			<index name="sqlite_autoindex_Модель_1" unique="UNIQUE" >
+				<column name="Наименование" />
+			</index>
+		</table>
+		<table name="СвидетельствоТС" >
+			<column name="Госномер" type="text" length="2000000000" jt="-1" />
+			<column name="Паспорт" type="text" length="2000000000" jt="-1" />
+			<column name="ПТС" type="text" length="2000000000" jt="-1" />
+			<column name="ДатаРегистрации" type="text" length="2000000000" jt="-1" />
+			<index name="pk_СвидетельствоТС" unique="UNIQUE" >
+				<column name="Госномер" />
+			</index>
+			<fk name="Fk_СвидетельствоТС" to_schema="Default" to_table="Машина" delete_action="cascade" update_action="cascade" >
+				<fk_column name="ПТС" pk="ПТС" />
+			</fk>
+			<fk name="Fk_СвидетельствоТС" to_schema="Default" to_table="ФизическоеЛицо" delete_action="cascade" update_action="cascade" >
+				<fk_column name="Паспорт" pk="Паспорт" />
+			</fk>
+		</table>
+		<table name="Сотрудник" >
+			<column name="НомерСотрудника" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="ФИО" type="text" length="100" jt="-1" />
+			<column name="Должность" type="text" length="2000000000" jt="-1" />
+			<column name="Звание" type="text" length="2000000000" jt="-1" />
+			<index name="pk_Сотрудник" unique="PRIMARY_KEY" >
+				<column name="НомерСотрудника" />
+			</index>
+		</table>
+		<table name="ТипНарушения" >
+			<column name="НомерТипаНарушения" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="Название" type="text" length="2000000000" jt="-1" />
+			<column name="РазмерШтрафа" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="КоАП" type="text" length="2000000000" jt="-1" />
+			<index name="pk_ТипНарушения" unique="PRIMARY_KEY" >
+				<column name="НомерТипаНарушения" />
+			</index>
+		</table>
+		<table name="ТипУчастника" >
+			<column name="НомерТипаУчастника" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="Статус" type="text" length="2000000000" jt="-1" />
+			<index name="pk_ТипУчастника" unique="PRIMARY_KEY" >
+				<column name="НомерТипаУчастника" />
+			</index>
+			<index name="sqlite_autoindex_ТипУчастника_1" unique="UNIQUE" >
+				<column name="Статус" />
+			</index>
+		</table>
+		<table name="УчастникиАвтомобили" >
+			<column name="Постановление" type="text" length="2000000000" jt="-1" />
+			<column name="Госномер" type="text" length="2000000000" jt="-1" />
+			<column name="Паспорт" type="text" length="2000000000" jt="-1" />
+			<column name="НомерТипаУчастника" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_УчастникиАвтомобили" to_schema="Default" to_table="ДТП" delete_action="cascade" update_action="cascade" >
+				<fk_column name="Постановление" pk="Постановление" />
+			</fk>
+			<fk name="Fk_УчастникиАвтомобили" to_schema="Default" to_table="СвидетельствоТС" delete_action="cascade" update_action="cascade" >
+				<fk_column name="Госномер" pk="Госномер" />
+			</fk>
+			<fk name="Fk_УчастникиАвтомобили" to_schema="Default" to_table="ТипУчастника" delete_action="cascade" update_action="cascade" >
+				<fk_column name="НомерТипаУчастника" pk="НомерТипаУчастника" />
+			</fk>
+			<fk name="Fk_УчастникиАвтомобили" to_schema="Default" to_table="ФизическоеЛицо" delete_action="cascade" update_action="cascade" >
+				<fk_column name="Паспорт" pk="Паспорт" />
+			</fk>
+		</table>
+		<table name="УчастникиПешеходы" >
+			<column name="Постановление" type="text" length="2000000000" jt="-1" />
+			<column name="Паспорт" type="text" length="2000000000" jt="-1" />
+			<column name="НомерТипаУчастника" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_УчастникиПешеходы" to_schema="Default" to_table="ДТП" delete_action="cascade" update_action="cascade" >
+				<fk_column name="Постановление" pk="Постановление" />
+			</fk>
+			<fk name="Fk_УчастникиПешеходы" to_schema="Default" to_table="ТипУчастника" delete_action="cascade" update_action="cascade" >
+				<fk_column name="НомерТипаУчастника" pk="НомерТипаУчастника" />
+			</fk>
+			<fk name="Fk_УчастникиПешеходы" to_schema="Default" to_table="ФизическоеЛицо" delete_action="cascade" update_action="cascade" >
+				<fk_column name="Паспорт" pk="Паспорт" />
+			</fk>
+		</table>
+		<table name="ФизическоеЛицо" >
+			<column name="Паспорт" type="text" length="2000000000" jt="-1" mandatory="y" />
+			<column name="ФИО" type="text" length="2000000000" jt="-1" />
+			<column name="АдресПроживания" type="text" length="2000000000" jt="-1" />
+			<column name="ДатаРождения" type="text" length="2000000000" jt="-1" />
+			<index name="pk_ФизическоеЛицо" unique="PRIMARY_KEY" >
+				<column name="Паспорт" />
+			</index>
+		</table>
+		<table name="Цвет" >
+			<column name="НомерЦвета" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="Название" type="text" length="2000000000" jt="-1" />
+			<index name="pk_Цвет" unique="PRIMARY_KEY" >
+				<column name="НомерЦвета" />
+			</index>
+			<index name="sqlite_autoindex_Цвет_1" unique="UNIQUE" >
+				<column name="Название" />
+			</index>
+		</table>
+		<table name="Штрафы" >
+			<column name="Постановление" type="text" length="2000000000" jt="-1" />
+			<column name="НомерТипаНарушения" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_Штрафы" to_schema="Default" to_table="ДТП" delete_action="cascade" update_action="cascade" >
+				<fk_column name="Постановление" pk="Постановление" />
+			</fk>
+			<fk name="Fk_Штрафы" to_schema="Default" to_table="ТипНарушения" delete_action="cascade" update_action="cascade" >
+				<fk_column name="НомерТипаНарушения" pk="НомерТипаНарушения" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="Sqlite" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.23.1.jar" driver_desc="Standard" host="localhost" port="7210" instance="C:/Users/Ostap/Documents/GitHub/AccidentRecorder/Sources/database.sqlite" />
+	<layout name="Default Layout" id="Layout_14197a9" show_column_type="y" show_relation="columns" >
+		<entity schema="Default" name="ДТП" color="bfd4f5" x="45" y="390" />
+		<entity schema="Default" name="ТипНарушения" color="bfd4f5" x="45" y="870" />
+		<entity schema="Default" name="Сотрудник" color="bfd4f5" x="45" y="90" />
+		<entity schema="Default" name="Модель" color="c8f5bf" x="255" y="45" />
+		<entity schema="Default" name="ФизическоеЛицо" color="bfd4f5" x="660" y="885" />
+		<entity schema="Default" name="СвидетельствоТС" color="c8f5bf" x="735" y="270" />
+		<entity schema="Default" name="Штрафы" color="bfd4f5" x="45" y="645" />
+		<entity schema="Default" name="Машина" color="c8f5bf" x="405" y="225" />
+		<entity schema="Default" name="ТипУчастника" color="bfd4f5" x="375" y="675" />
+		<entity schema="Default" name="Цвет" color="c8f5bf" x="555" y="45" />
+		<entity schema="Default" name="УчастникиПешеходы" color="bfd4f5" x="390" y="900" />
+		<entity schema="Default" name="Водитель" color="bfd4f5" x="600" y="765" />
+		<entity schema="Default" name="УчастникиАвтомобили" color="bfd4f5" x="420" y="435" />
+	</layout>
+	<layout name="Sample Layout with Tools" id="Layout_d63c78" show_column_type="y" show_relation="columns" >
+		<entity schema="Default" name="Водитель" color="bfd4f5" x="915" y="210" />
+		<entity schema="Default" name="ДТП" color="bfd4f5" x="315" y="210" />
+		<entity schema="Default" name="Машина" color="c8f5bf" x="1260" y="75" />
+		<entity schema="Default" name="Модель" color="c8f5bf" x="1560" y="285" />
+		<entity schema="Default" name="СвидетельствоТС" color="c8f5bf" x="1560" y="75" />
+		<entity schema="Default" name="Сотрудник" color="bfd4f5" x="45" y="420" />
+		<entity schema="Default" name="ТипУчастника" color="bfd4f5" x="390" y="75" />
+		<entity schema="Default" name="УчастникиАвтомобили" color="bfd4f5" x="645" y="210" />
+		<entity schema="Default" name="УчастникиПешеходы" color="bfd4f5" x="645" y="420" />
+		<entity schema="Default" name="ФизическоеЛицо" color="bfd4f5" x="915" y="420" />
+		<entity schema="Default" name="Цвет" color="c8f5bf" x="1260" y="285" />
+		<entity schema="Default" name="Штрафы" color="bfd4f5" x="315" y="420" />
+		<entity schema="Default" name="ТипНарушения" color="bfd4f5" x="315" y="555" />
+		<callout x="315" y="135" pointer="NO" >
+			<comment><![CDATA[Double-click any table, column or foreign key to edit, right-click to start one of the tools below.
+Use the Relational Data Browse for simultaneously exploring data from multiple tables.
+All tools will be saved to project file and can be reopen.]]></comment>
+		</callout>
+		<group name="ДТП" color="ecf0f7" >
+			<entity schema="Default" name="ДТП" />
+			<entity schema="Default" name="УчастникиАвтомобили" />
+			<entity schema="Default" name="УчастникиПешеходы" />
+			<entity schema="Default" name="ФизическоеЛицо" />
+			<entity schema="Default" name="Водитель" />
+			<entity schema="Default" name="ТипУчастника" />
+			<entity schema="Default" name="Штрафы" />
+			<entity schema="Default" name="Сотрудник" />
+			<entity schema="Default" name="ТипНарушения" />
+		</group>
+		<group name="Машина" color="eef7ec" >
+			<entity schema="Default" name="Машина" />
+			<entity schema="Default" name="СвидетельствоТС" />
+			<entity schema="Default" name="Модель" />
+			<entity schema="Default" name="Цвет" />
+		</group>
+		<script name="Sample SQL Editor" id="Editor_5ac960f" language="SQL" >
+			<string><![CDATA[SELECT * 
+FROM
+	ДТП ДТП;]]></string>
+		</script>
+		<browser id="Browse_5af94a3" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="Default" entity="ДТП" x="20" y="20" width="400" height="300" />
+		</browser>
+		<query id="Query_20b8786" name="Sample Query Builder" >
+			<query_table schema="Default" name="ДТП" alias="д" x="45" y="45" >
+				<column name="Постановление" />
+				<column name="НомерСотрудника" />
+				<column name="МестоПроисшествия" />
+				<column name="Описание" />
+				<column name="Дата" />
+				<column name="Широта" />
+				<column name="Долгота" />
+			</query_table>
+		</query>
+	</layout>
+</project>

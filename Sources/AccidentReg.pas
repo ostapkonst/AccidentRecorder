@@ -161,15 +161,22 @@ var
   J: TJSONData;
   lat, lng: double;
 begin
-  J := GetJSON(UTF8Encode(message));
-  lat := J.FindPath('lat').AsFloat;
-  lng := J.FindPath('lng').AsFloat;
-  J.Free;
-  if not (DTPSQLQuery.State in [dsEdit, dsInsert]) then
-    DTPSQLQuery.Edit;
-  LatEdit.Field.Value := lat;
-  LngEdit.Field.Value := lng;
-  Result := True;
+  try
+    J := GetJSON(UTF8Encode(message));
+    try
+      lat := J.FindPath('lat').AsFloat;
+      lng := J.FindPath('lng').AsFloat;
+    finally
+      J.Free;
+    end;
+    if not (DTPSQLQuery.State in [dsEdit, dsInsert]) then
+      DTPSQLQuery.Edit;
+    LatEdit.Field.Value := lat;
+    LngEdit.Field.Value := lng;
+    Result := True;
+  except
+    // TODO: Обработать исключение
+  end;
 end;
 
 procedure TAccidentForm.GoogleMapLoadEnd(Sender: TObject;
