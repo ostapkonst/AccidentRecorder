@@ -1,5 +1,5 @@
 --
--- Файл сгенерирован с помощью SQLiteStudio v3.1.1 в Пн июн 18 22:56:15 2018
+-- Файл сгенерирован с помощью SQLiteStudio v3.1.1 в Ср июн 20 01:45:23 2018
 --
 -- Использованная кодировка текста: UTF-8
 --
@@ -43,7 +43,7 @@ CREATE TABLE ФизическоеЛицо (Паспорт VARCHAR PRIMARY KEY NO
 CREATE TABLE Цвет (НомерЦвета INTEGER NOT NULL PRIMARY KEY, Название VARCHAR UNIQUE);
 
 -- Таблица: Штрафы
-CREATE TABLE Штрафы (Постановление VARCHAR REFERENCES ДТП (Постановление) ON DELETE CASCADE ON UPDATE CASCADE, НомерТипаНарушения INTEGER REFERENCES ТипНарушения (НомерТипаНарушения) ON DELETE CASCADE ON UPDATE CASCADE);
+CREATE TABLE Штрафы (Постановление VARCHAR REFERENCES ДТП (Постановление) ON DELETE CASCADE ON UPDATE CASCADE, НомерТипаНарушения INTEGER REFERENCES ТипНарушения (НомерТипаНарушения) ON DELETE CASCADE ON UPDATE CASCADE, Надбавка INTEGER NOT NULL DEFAULT (0));
 
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;

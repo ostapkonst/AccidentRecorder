@@ -1,7 +1,7 @@
 object AccidentForm: TAccidentForm
-  Left = 311
+  Left = 394
   Height = 546
-  Top = 210
+  Top = 220
   Width = 816
   Caption = 'Происшествия'
   ClientHeight = 546
@@ -301,7 +301,6 @@ object AccidentForm: TAccidentForm
     top = 136
   end
   object DTPCustomerSQLQuery: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'НомерСотрудника'

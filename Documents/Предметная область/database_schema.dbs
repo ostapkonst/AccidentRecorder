@@ -166,6 +166,9 @@
 		<table name="Штрафы" >
 			<column name="Постановление" type="text" length="2000000000" jt="-1" />
 			<column name="НомерТипаНарушения" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="Надбавка" type="integer" jt="4" mandatory="y" >
+				<defo>0</defo>
+			</column>
 			<fk name="Fk_Штрафы" to_schema="Default" to_table="ДТП" delete_action="cascade" update_action="cascade" >
 				<fk_column name="Постановление" pk="Постановление" />
 			</fk>
@@ -182,13 +185,13 @@
 		<entity schema="Default" name="Модель" color="c8f5bf" x="255" y="45" />
 		<entity schema="Default" name="ФизическоеЛицо" color="bfd4f5" x="660" y="885" />
 		<entity schema="Default" name="СвидетельствоТС" color="c8f5bf" x="735" y="270" />
-		<entity schema="Default" name="Штрафы" color="bfd4f5" x="45" y="645" />
 		<entity schema="Default" name="Машина" color="c8f5bf" x="405" y="225" />
 		<entity schema="Default" name="ТипУчастника" color="bfd4f5" x="375" y="675" />
 		<entity schema="Default" name="Цвет" color="c8f5bf" x="555" y="45" />
 		<entity schema="Default" name="УчастникиПешеходы" color="bfd4f5" x="390" y="900" />
 		<entity schema="Default" name="Водитель" color="bfd4f5" x="600" y="765" />
 		<entity schema="Default" name="УчастникиАвтомобили" color="bfd4f5" x="420" y="435" />
+		<entity schema="Default" name="Штрафы" color="bfd4f5" x="45" y="645" />
 	</layout>
 	<layout name="Sample Layout with Tools" id="Layout_d63c78" show_column_type="y" show_relation="columns" >
 		<entity schema="Default" name="Водитель" color="bfd4f5" x="915" y="210" />
