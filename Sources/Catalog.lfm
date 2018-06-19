@@ -1,7 +1,7 @@
 object Directory: TDirectory
-  Left = 398
+  Left = 559
   Height = 575
-  Top = 182
+  Top = 183
   Width = 751
   Caption = 'Directory'
   ClientHeight = 575

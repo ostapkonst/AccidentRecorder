@@ -137,7 +137,7 @@ begin
     // TODO: Обработать все исключения
     on e: EDatabaseError do
       MessageDlg('Не удалось удалить выбранную запись',
-        mtError, [mbOK], 0)
+        mtError, [mbOK], 0);
   end;
   SaveBtnClick(Self);
 end;
@@ -158,7 +158,7 @@ begin
   except
     // TODO: Обработать все исключения
     on e: EDatabaseError do
-      MessageDlg('Произошла ошибка при применении изменений', mtError, [mbOK], 0)
+      MessageDlg('Произошла ошибка при применении изменений', mtError, [mbOK], 0);
   end;
 end;
 

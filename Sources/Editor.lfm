@@ -329,7 +329,7 @@ object CellEditor: TCellEditor
   object SQLQuery: TSQLQuery
     FieldDefs = <>
     Database = SQLite.SQLite3Connection
-    Transaction = SQLTransaction
+    Transaction = SQLite.SQLTransact
     Params = <>
     UpdateMode = upWhereAll
     left = 112

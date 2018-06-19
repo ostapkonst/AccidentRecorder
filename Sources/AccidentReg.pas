@@ -42,6 +42,10 @@ type
     procedure CommitChangesClick(Sender: TObject);
     procedure DBNavigatorBeforeAction(Sender: TObject; Button: TDBNavButtonType);
     procedure DTPDataSourceDataChange(Sender: TObject; Field: TField);
+    procedure DTPDataSourceStateChange(Sender: TObject);
+    procedure DTPDataSourceUpdateData(Sender: TObject);
+    procedure DTPSQLQueryAfterDelete(DataSet: TDataSet);
+    procedure DTPSQLQueryAfterRefresh(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -120,11 +124,33 @@ begin
     MoveGoogleMark;
 end;
 
+procedure TAccidentForm.DTPDataSourceStateChange(Sender: TObject);
+begin
+  CommitChanges.Enabled := (DTPSQLQuery.ChangeCount > 0) or
+    (DTPSQLQuery.State in [dsEdit, dsInsert]);
+end;
+
+procedure TAccidentForm.DTPDataSourceUpdateData(Sender: TObject);
+begin
+  // TODO: Так лучше не делать
+  NumberEdit.Field.Required := False;
+end;
+
+procedure TAccidentForm.DTPSQLQueryAfterDelete(DataSet: TDataSet);
+begin
+  CommitChanges.Enabled := True;
+end;
+
+procedure TAccidentForm.DTPSQLQueryAfterRefresh(DataSet: TDataSet);
+begin
+  CommitChanges.Enabled := False;
+end;
+
 procedure TAccidentForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 const
-  q = 'Есть неподтвержденные изменения, выйти?';
+  q = 'Внесенные изменения не будут сохранены, выйти?';
 begin
-  if not (DTPSQLQuery.State in [dsEdit, dsInsert]) then
+  if (DTPSQLQuery.State = dsBrowse) and (DTPSQLQuery.ChangeCount = 0) then
     CanClose := True
   else
   if MessageDlg(q, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
@@ -138,17 +164,23 @@ end;
 
 procedure TAccidentForm.CommitChangesClick(Sender: TObject);
 begin
-  DTPSQLQuery.ApplyUpdates;
-  DTPSQLQuery.SQLTransaction.Commit;
-  AccidentForm.Close;
+  try
+    DTPSQLQuery.ApplyUpdates;
+    DTPSQLQuery.SQLTransaction.CommitRetaining;
+    CommitChanges.Enabled := False;
+  except
+    // TODO: Обработать все исключения
+    on e: EDatabaseError do
+      MessageDlg('Произошла ошибка при применении изменений', mtError, [mbOK], 0);
+  end;
 end;
 
 procedure TAccidentForm.DBNavigatorBeforeAction(Sender: TObject;
   Button: TDBNavButtonType);
 begin
   case Button of
-    nbRefresh: if (DTPSQLQuery.State in [dsEdit, dsInsert]) then
-        DTPSQLQuery.CancelUpdates;
+    nbRefresh:
+      DTPSQLQuery.CancelUpdates;
     nbDelete: if MessageDlg(
         'Вы дейтсвительно хотите удалить ДТП?',
         mtConfirmation, [mbYes, mbNo], 0) = mrNo then
@@ -205,19 +237,31 @@ begin
 end;
 
 procedure TAccidentForm.CustomersToolButtonClick(Sender: TObject);
+var
+  cat: TDirectory;
 begin
-  TDirectory.CreateCatalogByName(Self, 'УчастникиПешеходы').ShowModal;
+  cat := TDirectory.CreateCatalogByName(Self, 'УчастникиПешеходы');
+  cat.Position := poOwnerFormCenter;
+  cat.ShowModal;
 end;
 
 procedure TAccidentForm.AutoToolButtonClick(Sender: TObject);
+var
+  cat: TDirectory;
 begin
-  TDirectory.CreateCatalogByName(Self,
-    'УчастникиАвтомобили').ShowModal;
+  cat := TDirectory.CreateCatalogByName(Self,
+    'УчастникиАвтомобили');
+  cat.Position := poOwnerFormCenter;
+  cat.ShowModal;
 end;
 
 procedure TAccidentForm.SanctionsToolButtonClick(Sender: TObject);
+var
+  cat: TDirectory;
 begin
-  TDirectory.CreateCatalogByName(Self, 'Штрафы').ShowModal;
+  cat := TDirectory.CreateCatalogByName(Self, 'Штрафы');
+  cat.Position := poOwnerFormCenter;
+  cat.ShowModal;
 end;
 
 end.

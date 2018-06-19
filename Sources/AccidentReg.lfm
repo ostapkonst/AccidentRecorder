@@ -1,7 +1,7 @@
 object AccidentForm: TAccidentForm
-  Left = 350
+  Left = 311
   Height = 546
-  Top = 268
+  Top = 210
   Width = 816
   Caption = 'Происшествия'
   ClientHeight = 546
@@ -82,6 +82,7 @@ object AccidentForm: TAccidentForm
       Anchors = [akBottom]
       BorderSpacing.Bottom = 10
       Caption = 'Применить'
+      Enabled = False
       OnClick = CommitChangesClick
       TabOrder = 1
     end
@@ -275,6 +276,8 @@ object AccidentForm: TAccidentForm
         DataType = ftFloat
         Precision = -1
       end>
+    AfterDelete = DTPSQLQueryAfterDelete
+    AfterRefresh = DTPSQLQueryAfterRefresh
     Database = SQLite.SQLite3Connection
     Transaction = SQLite.SQLTransact
     SQL.Strings = (
@@ -286,7 +289,9 @@ object AccidentForm: TAccidentForm
   end
   object DTPDataSource: TDataSource
     DataSet = DTPSQLQuery
+    OnStateChange = DTPDataSourceStateChange
     OnDataChange = DTPDataSourceDataChange
+    OnUpdateData = DTPDataSourceUpdateData
     left = 384
     top = 24
   end
@@ -296,7 +301,31 @@ object AccidentForm: TAccidentForm
     top = 136
   end
   object DTPCustomerSQLQuery: TSQLQuery
-    FieldDefs = <>
+    IndexName = 'DEFAULT_ORDER'
+    FieldDefs = <    
+      item
+        Name = 'НомерСотрудника'
+        DataType = ftAutoInc
+        Precision = -1
+      end    
+      item
+        Name = 'ФИО'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end    
+      item
+        Name = 'Должность'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end    
+      item
+        Name = 'Звание'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end>
     Database = SQLite.SQLite3Connection
     Transaction = SQLite.SQLTransact
     SQL.Strings = (
