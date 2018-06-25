@@ -15,6 +15,7 @@ type
   { TAccidentForm }
 
   TAccidentForm = class(TForm)
+    FindAddrButton: TButton;
     CommitChanges: TBitBtn;
     DTPCustomerDataSource: TDataSource;
     CustomerLookupCB: TDBLookupComboBox;
@@ -46,6 +47,7 @@ type
     procedure DTPDataSourceUpdateData(Sender: TObject);
     procedure DTPSQLQueryAfterDelete(DataSet: TDataSet);
     procedure DTPSQLQueryAfterRefresh(DataSet: TDataSet);
+    procedure FindAddrButtonClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -131,9 +133,14 @@ begin
 end;
 
 procedure TAccidentForm.DTPDataSourceUpdateData(Sender: TObject);
+var
+  i: integer;
 begin
   // TODO: Так лучше не делать
-  NumberEdit.Field.Required := False;
+  with DTPDataSource.DataSet do
+    for i := 0 to FieldCount - 1 do
+      if Fields[i].Required then
+        Fields[i].Required := False;
 end;
 
 procedure TAccidentForm.DTPSQLQueryAfterDelete(DataSet: TDataSet);
@@ -144,6 +151,24 @@ end;
 procedure TAccidentForm.DTPSQLQueryAfterRefresh(DataSet: TDataSet);
 begin
   CommitChanges.Enabled := False;
+end;
+
+procedure TAccidentForm.FindAddrButtonClick(Sender: TObject);
+const
+  Address: string = 'codeAddress(''%s'', %s);';
+var
+  c, f: string;
+begin
+  if (LatEdit.Field.IsNull or LngEdit.Field.IsNull) then
+    f := 'true'
+  else
+    f := 'false';
+  try
+    c := Format(Address, [PlaceEdit.Field.AsString, f]);
+    GoogleMap.Browser.MainFrame.ExecuteJavaScript(c, 'about:blank', 0);
+  except
+    // TODO: Обработать исключение
+  end;
 end;
 
 procedure TAccidentForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);

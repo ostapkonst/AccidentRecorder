@@ -164,8 +164,10 @@ end;
 
 procedure TCellEditor.CancelBtnClick(Sender: TObject);
 begin
-  SQLQuery.SQLTransaction.RollbackRetaining;
-  fSQLQuery.Refresh;
+  // Дополнительный откат транзакции не требуется
+  //SQLQuery.CancelUpdates;
+  //SQLQuery.SQLTransaction.RollbackRetaining;
+  //fSQLQuery.Refresh;
   Close;
 end;
 

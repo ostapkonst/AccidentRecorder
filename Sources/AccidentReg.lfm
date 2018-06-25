@@ -1,7 +1,7 @@
 object AccidentForm: TAccidentForm
-  Left = 394
+  Left = 354
   Height = 546
-  Top = 220
+  Top = 280
   Width = 816
   Caption = 'Происшествия'
   ClientHeight = 546
@@ -61,7 +61,7 @@ object AccidentForm: TAccidentForm
       BorderSpacing.Bottom = 10
       DataField = 'Описание'
       DataSource = DTPDataSource
-      TabOrder = 0
+      TabOrder = 6
     end
     object NumberLabel: TLabel
       Left = 8
@@ -82,9 +82,10 @@ object AccidentForm: TAccidentForm
       Anchors = [akBottom]
       BorderSpacing.Bottom = 10
       Caption = 'Применить'
+      Default = True
       Enabled = False
       OnClick = CommitChangesClick
-      TabOrder = 1
+      TabOrder = 7
     end
     object NumberEdit: TDBEdit
       Left = 8
@@ -95,18 +96,18 @@ object AccidentForm: TAccidentForm
       DataSource = DTPDataSource
       CharCase = ecNormal
       MaxLength = 0
-      TabOrder = 2
+      TabOrder = 0
     end
     object PlaceEdit: TDBEdit
       Left = 8
       Height = 23
       Top = 88
-      Width = 278
+      Width = 208
       DataField = 'МестоПроисшествия'
       DataSource = DTPDataSource
       CharCase = ecNormal
       MaxLength = 0
-      TabOrder = 3
+      TabOrder = 1
     end
     object LatLabel: TLabel
       Left = 8
@@ -178,7 +179,7 @@ object AccidentForm: TAccidentForm
         'Обновить данные'
       )
       Options = []
-      TabOrder = 6
+      TabOrder = 8
       VisibleButtons = [nbPrior, nbNext, nbInsert, nbDelete, nbRefresh]
     end
     object CustomerLabel: TLabel
@@ -201,7 +202,16 @@ object AccidentForm: TAccidentForm
       ListFieldIndex = 0
       ListSource = DTPCustomerDataSource
       LookupCache = False
-      TabOrder = 7
+      TabOrder = 3
+    end
+    object FindAddrButton: TButton
+      Left = 224
+      Height = 26
+      Top = 86
+      Width = 62
+      Caption = 'Найти'
+      OnClick = FindAddrButtonClick
+      TabOrder = 2
     end
   end
   object DTPToolBar: TToolBar
