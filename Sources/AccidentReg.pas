@@ -60,10 +60,10 @@ type
     procedure GoogleMapConsoleMessage(Sender: TObject;
       const Browser: ICefBrowser; const message, Source: ustring;
       line: integer; out Result: boolean);
-    procedure GoogleMapLoadEnd(Sender: TObject; const Browser: ICefBrowser;
-      const Frame: ICefFrame; httpStatusCode: integer);
     procedure CustomersToolButtonClick(Sender: TObject);
     procedure AutoToolButtonClick(Sender: TObject);
+    procedure GoogleMapLoadEnd(Sender: TObject; const Browser: ICefBrowser;
+      const Frame: ICefFrame; httpStatusCode: integer);
     procedure SanctionsToolButtonClick(Sender: TObject);
   private
     procedure MoveGoogleMark();
@@ -122,8 +122,9 @@ end;
 
 procedure TAccidentForm.DTPDataSourceDataChange(Sender: TObject; Field: TField);
 begin
-  if (GoogleMap.Browser <> nil) then
-    MoveGoogleMark;
+  // Обработчик присваивается событию onDataChange после загрузки страницы
+  //if (GoogleMap.Browser <> nil) then
+  MoveGoogleMark;
 end;
 
 procedure TAccidentForm.DTPDataSourceStateChange(Sender: TObject);
@@ -163,12 +164,9 @@ begin
     f := 'true'
   else
     f := 'false';
-  try
-    c := Format(Address, [PlaceEdit.Field.AsString, f]);
-    GoogleMap.Browser.MainFrame.ExecuteJavaScript(c, 'about:blank', 0);
-  except
-    // TODO: Обработать исключение
-  end;
+
+  c := Format(Address, [PlaceEdit.Field.AsString, f]);
+  GoogleMap.Browser.MainFrame.ExecuteJavaScript(c, 'about:blank', 0);
 end;
 
 procedure TAccidentForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
@@ -249,16 +247,17 @@ begin
       DTPSQLQuery.Edit;
     LatEdit.Field.Value := lat;
     LngEdit.Field.Value := lng;
-    Result := True;
   except
     // TODO: Обработать исключение
+    on e: EJSONParser do
+    begin
+      DTPDataSource.OnDataChange := nil;
+      FindAddrButton.Enabled := False;
+      GoogleMap.Load(GetCurrentDir + PathDelim + 'error_page.html');
+    end;
   end;
-end;
-
-procedure TAccidentForm.GoogleMapLoadEnd(Sender: TObject;
-  const Browser: ICefBrowser; const Frame: ICefFrame; httpStatusCode: integer);
-begin
-  MoveGoogleMark;
+  // TODO: Разобраться как работает этот параметр
+  Result := False;
 end;
 
 procedure TAccidentForm.CustomersToolButtonClick(Sender: TObject);
@@ -278,6 +277,16 @@ begin
     'УчастникиАвтомобили');
   cat.Position := poOwnerFormCenter;
   cat.ShowModal;
+end;
+
+procedure TAccidentForm.GoogleMapLoadEnd(Sender: TObject;
+  const Browser: ICefBrowser; const Frame: ICefFrame; httpStatusCode: integer);
+begin
+  if ExtractFileName(Browser.MainFrame.Url) <> 'maps_tamplate.html' then
+    exit;
+  DTPDataSource.OnDataChange := @AccidentForm.DTPDataSourceDataChange;
+  FindAddrButton.Enabled := True;
+  MoveGoogleMark;
 end;
 
 procedure TAccidentForm.SanctionsToolButtonClick(Sender: TObject);

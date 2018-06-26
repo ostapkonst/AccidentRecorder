@@ -18,7 +18,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <RevisionNr Value="1"/>
-      <BuildNr Value="5"/>
+      <BuildNr Value="6"/>
       <Language Value="0419"/>
       <Attributes pvaPrivateBuild="True"/>
       <StringTable Comments="Курсовая работа по БД" CompanyName="ДВФУ" FileDescription="Оболочка для работы с базой SQLiteV3" InternalName="Accident Recorder (Coursework)" LegalCopyright="Константинов О. В." OriginalFilename="AccidentRecorder.exe" ProductName="Регистрация ДТП" ProductVersion="0.0.1.0" PrivateBuild="Версия для преподавателя"/>
@@ -176,9 +176,11 @@
       </Item1>
       <Item2>
         <Name Value="ECodetoolError"/>
+        <Enabled Value="False"/>
       </Item2>
       <Item3>
         <Name Value="EFOpenError"/>
+        <Enabled Value="False"/>
       </Item3>
       <Item4>
         <Name Value="EJSONParser"/>

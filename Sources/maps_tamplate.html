@@ -47,7 +47,7 @@
             marker.addListener('click', toggleBounce);
             marker.addListener('dragend', consoleLog);
           } else {
-            window.alert('Geocode was not successful for the following reason: ' + status);
+            throw new Error('Geocode was not successful for the following reason: ' + status);
           }
         });
       }
@@ -60,7 +60,7 @@
             if (moveMarker === true)
               marker.setPosition(myLatLng);
           } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            throw new Error('Geocode was not successful for the following reason: ' + status);
           }
         });
       }
@@ -79,7 +79,7 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&language=ru&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAP_API_KEY&language=ru&callback=initMap">
     </script>
   </body>
 </html>

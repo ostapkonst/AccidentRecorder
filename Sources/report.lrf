@@ -7,7 +7,7 @@
     <KeyWords Value=""/>
     <Comments Value=""/>
     <ReportCreateDate Value="1899-12-30 00:00:00"/>
-    <ReportLastChange Value="2018-06-18 16:57:45"/>
+    <ReportLastChange Value="2018-06-27 03:38:45"/>
     <ReportVersionBuild Value="3"/>
     <ReportVersionMajor Value="0"/>
     <ReportVersionMinor Value="0"/>
@@ -2689,7 +2689,7 @@
           <Data>
             <Format Value="556"/>
             <FormatStr Value=""/>
-            <Memo Value="виновным (-ой) в совершении административного нарушения, ответственность за которое предусмотрена статьями [SQLDTPReport.&quot;КоАП&quot;] части 1 КоАП РФ.&#xD;&#xA;"/>
+            <Memo Value="виновным (-ой) в совершении административного нарушения, ответственность за которое предусмотрена статьями [SQLDTPReport.&quot;КоАП&quot;] КоАП РФ.&#xD;&#xA;"/>
             <Script Value=""/>
             <GapX Value="0"/>
             <GapY Value="0"/>

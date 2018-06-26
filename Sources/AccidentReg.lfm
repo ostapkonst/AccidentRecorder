@@ -1,7 +1,7 @@
 object AccidentForm: TAccidentForm
-  Left = 354
+  Left = 96
   Height = 546
-  Top = 280
+  Top = 131
   Width = 816
   Caption = 'Происшествия'
   ClientHeight = 546
@@ -210,6 +210,7 @@ object AccidentForm: TAccidentForm
       Top = 86
       Width = 62
       Caption = 'Найти'
+      Enabled = False
       OnClick = FindAddrButtonClick
       TabOrder = 2
     end
@@ -300,7 +301,6 @@ object AccidentForm: TAccidentForm
   object DTPDataSource: TDataSource
     DataSet = DTPSQLQuery
     OnStateChange = DTPDataSourceStateChange
-    OnDataChange = DTPDataSourceDataChange
     OnUpdateData = DTPDataSourceUpdateData
     left = 384
     top = 24

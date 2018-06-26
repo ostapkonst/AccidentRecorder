@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Marker Animations</title>
+    <title>Google Maps Marker</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -20,31 +20,49 @@
   <body>
     <div id="map"></div>
     <script>
-
-      // The following example creates a marker in Stockholm, Sweden using a DROP
-      // animation. Clicking on the marker will toggle the animation between a BOUNCE
-      // animation and no animation.
-
+      var map;
       var marker;
+      var geocoder;
+      var city = 'Владивосток';
 
-      function initMapVladivostok() {
-        var myLatLng = {lat: 43.106, lng: 131.874};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: myLatLng,
-          disableDefaultUI: true
+      function initMap() {
+        geocoder = new google.maps.Geocoder;
+        geocoder.geocode({'address': city}, function(results, status) {
+          if (status == 'OK') {
+            var myLatLng = results[0].geometry.location;
+            var mapOptions = {
+              zoom: 13,
+              center: myLatLng,
+              disableDefaultUI: true
+            }
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            marker = new google.maps.Marker({
+              map: map,
+              position: myLatLng,
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+              title: 'Место ДТП'
+            });
+
+            marker.addListener('click', toggleBounce);
+            marker.addListener('dragend', consoleLog);
+          } else {
+            throw new Error('Geocode was not successful for the following reason: ' + status);
+          }
         });
+      }
 
-        marker = new google.maps.Marker({
-          map: map,
-          draggable: true,
-          animation: google.maps.Animation.DROP,
-          position: myLatLng,
-          title: 'Место ДТП'
+      function codeAddress(address, moveMarker) {
+        geocoder.geocode( { 'address': city + ', ' + address}, function(results, status) {
+          if (status == 'OK') {
+            var myLatLng = results[0].geometry.location;
+            map.setCenter(myLatLng);
+            if (moveMarker === true)
+              marker.setPosition(myLatLng);
+          } else {
+            throw new Error('Geocode was not successful for the following reason: ' + status);
+          }
         });
-
-        marker.addListener('click', toggleBounce);
-        marker.addListener('dragend', consoleLog);
       }
 
       function toggleBounce() {
@@ -61,7 +79,7 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&language=ru&callback=initMapVladivostok">
+    src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAP_API_KEY&language=ru&callback=initMap">
     </script>
   </body>
 </html>
